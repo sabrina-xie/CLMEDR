@@ -56,10 +56,10 @@ all <- data.frame(
 for(k in loop){
   
   #Paste in folder where files are located
-  folder <- paste("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/",k,"/",sep="")
+  folder <- paste(k,"/",sep="")
   
   #Run script to format files into 1 big data frame
-  source("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/Read-data.R", local=knitr::knit_global())
+  source("Read-data.R", local=knitr::knit_global())
   
   # the outputs of this script are data frames for each utility for large, small and HES data, titled "ES" or "UI"
   # it also creates "data" which is one large dataframe with ALL the collection and disbursement data for both utilities
@@ -76,7 +76,7 @@ for(k in loop){
 data <- all
 
 # Other metrics
-source("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/Demo-data.R", local=knitr::knit_global())
+source("Demo-data.R", local=knitr::knit_global())
 
 data <- data %>%
   distinct() %>%  
@@ -115,7 +115,7 @@ data <- left_join(data,race2,by=c("Census Tract")) %>%
   select(-Racial.diversity2,-Racial.diversity3)
 
 errors <- data[!complete.cases(data), ]
-census <- read.csv("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/full list.csv") %>% rename(`Census Tract`=Census.Tract)
+census <- read.csv("full list.csv") %>% rename(`Census Tract`=Census.Tract)
 errors <- left_join(errors, census, by="Census Tract")
 
 rm(list=setdiff(ls(), c("data","race")))
@@ -467,7 +467,7 @@ med_income.join$cat <- factor(med_income.join$cat, levels = c("low","moderate","
 ggplot(med_income.join, aes(y=disbursements,x=cat,fill=Utility))+
   geom_bar(stat="identity",position="dodge")+
   geom_errorbar(aes(ymin=baseline,ymax=baseline),width=1,position=position_dodge(0.9))+
-  facet_grid(cols=vars(Year),rows=vars(Utility))+
+  facet_grid(cols=vars(Year),rows=vars(Utility),scales="free")+
   labs(caption="Black line denotes baseline")
 
 
@@ -487,7 +487,54 @@ ggplot(data = race, aes(fill = percent)) +
   theme(axis.line = element_blank(), axis.text = element_blank(),
         axis.ticks = element_blank(), axis.title = element_blank())
 
-hist(race$percent)
+ggplot(race,aes(x=percent)) +
+  geom_histogram(bins=30)+
+  geom_vline(xintercept=mean(race$percent,na.rm=T))+
+  labs(caption="vertical line denotes mean")
+
+race <- race %>% 
+  mutate(percentile = percent_rank(percent)) %>% 
+  mutate(rank = case_when(
+    percentile <= 0.2 ~ 1,
+    between(percentile,0.2,0.4) ~ 2,
+    between(percentile, 0.4,0.6) ~ 3,
+    between(percentile, 0.6,0.8) ~ 4,
+    percentile >= 0.8 ~ 5
+  ))
+
+##
+
+ggplot(race)+
+  geom_bar(aes(x=rank),stat="count")
+
+race <- race %>% 
+  mutate(GEOID=as.numeric(GEOID)) %>% 
+  rename(`Census Tract` = GEOID)
+
+race.join <- left_join(by.tract,race,all.y=TRUE) %>% 
+  group_by(Year,rank,Utility) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(Year,rank,Utility,collections,disbursements)%>% 
+  distinct() %>% 
+  filter(is.na(rank)==FALSE)
+
+totals <- race.join %>% 
+  group_by(Year,Utility) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(Year,Utility,disbursements) %>% 
+  distinct() %>% 
+  mutate(baseline=disbursements*0.2) %>% 
+  select(-disbursements)
+
+race.join <- left_join(race.join,totals)
+
+ggplot(race.join, aes(y=disbursements,x=rank,fill=Utility))+
+  geom_bar(stat="identity",position="dodge")+
+  geom_errorbar(aes(ymin=baseline,ymax=baseline),width=1,position=position_dodge(0.9))+
+  facet_grid(cols=vars(Year),rows=vars(Utility),scales="free")+
+  labs(caption="Black line denotes baseline")
+
 
 ```
 
@@ -495,7 +542,7 @@ hist(race$percent)
 
 ```{r, results='hide'}
 
-LEAD <- read.csv("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/LEAD.csv") 
+LEAD <- read.csv("LEAD.csv") 
 census_tracts <- tracts("CT",cb=TRUE,year="2010") %>% mutate(census_tract=as.numeric(paste(STATE,COUNTY,TRACT,sep="")))
 
 LEAD <- LEAD %>% rename(census_tract=Geography.ID)
