@@ -1,0 +1,540 @@
+---
+title: "Equitable Distribution Report"
+author: "Sabrina xie"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+options(scipen = 10, digits = 2)
+
+library(readxl)  #for excel files
+library(tidyverse) #for data wrangling
+library(ggplot2) #for figures
+library(lubridate) #for date-times
+library(tidycensus) #for mapping
+library(tigris)
+library(viridis) #for color maps
+
+```
+
+## Read in data
+
+Data for median income, spending & collections from Eversource, UI in 2019, 2020 and 2021 filed under C&LM.
+
+Data for demographics:
+
+- Energy burden from EPA LEAD tool
+
+- Justice40 disadvantaged communities from Climate and economic Justice Screening Tool
+
+- Racial diversity from US Census Bureau 2020 Decennial Census
+
+There are some problems with census tract numbers in the utility data so some demographic data does not collate properly.
+
+```{r, include=FALSE, echo=FALSE}
+
+loop <- c("2019","2020","2021")
+all <- data.frame(
+  `Census Tract`=character(0),
+  Town=character(0),
+  `Distressed Tract`=character(0),
+  Size=character(0),
+  Cat=character(0),
+  collections=numeric(0),
+  disbursements=numeric(0),
+  Utility=character(0),
+  Year=numeric(0),
+  stringsAsFactors=FALSE
+)
+
+for(k in loop){
+  
+  #Paste in folder where files are located
+  folder <- paste("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/",k,"/",sep="")
+  
+  #Run script to format files into 1 big data frame
+  source("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/Read-data.R", local=knitr::knit_global())
+  
+  # the outputs of this script are data frames for each utility for large, small and HES data, titled "ES" or "UI"
+  # it also creates "data" which is one large dataframe with ALL the collection and disbursement data for both utilities
+  
+  # the columns in "data" are: Census Tract, Town, Distressed Tract, Cat, collections, disbursements, Utility
+  
+  data <- data %>% 
+    mutate(Year=as.numeric(k))
+  
+  all <- rbind(all,data)
+  
+}
+
+data <- all
+
+# Other metrics
+source("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/Demo-data.R", local=knitr::knit_global())
+
+data <- data %>%
+  distinct() %>%  
+  mutate(disbursements=replace_na(disbursements,0),collections=replace_na(collections,0))
+
+race <- get_decennial(
+  geography = "tract",
+  state = "CT",
+  variables = c(
+    Hispanic = "P2_002N",
+    White = "P2_005N",
+    Black = "P2_006N",
+    Native = "P2_007N",
+    Asian = "P2_008N"
+  ),
+  summary_var = "P2_001N",
+  year = 2020,
+  geometry = TRUE
+) %>%
+  mutate(percent = 100 * (value / summary_value)) %>% 
+  filter(variable != "White") %>% 
+  group_by(GEOID) %>% 
+  mutate(percent = sum(percent)) %>% 
+  ungroup() %>% 
+  select(-variable,-value) %>% 
+  distinct()
+
+race2 <- race %>% select(GEOID,percent) %>% mutate(GEOID=as.numeric(GEOID)) %>% rename(`Census Tract`=GEOID)
+
+data <- left_join(data,race2,by=c("Census Tract")) %>%  
+  select(-geometry) %>% 
+  rename(Racial.diversity2=percent,
+         Racial.diversity3=Racial.diversity) %>% 
+  mutate(Racial.diversity=ifelse(is.na(Racial.diversity2), Racial.diversity3,
+                           ifelse(Racial.diversity2 >= 0, Racial.diversity2, NA))) %>% 
+  select(-Racial.diversity2,-Racial.diversity3)
+
+errors <- data[!complete.cases(data), ]
+census <- read.csv("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/full list.csv") %>% rename(`Census Tract`=Census.Tract)
+errors <- left_join(errors, census, by="Census Tract")
+
+rm(list=setdiff(ls(), c("data","race")))
+
+```
+
+## Tables
+
+### Distressed tracts
+
+Overall trend toward closing gaps
+
+- Distressed tracts: median income <60% state median income
+
+- Small load: <100 kWh
+
+
+```{r}
+
+totals <- data %>% 
+  filter(Size!="HES",
+         Cat=="TOTAL") %>% 
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size!="HES", #large and small
+         Cat=="TOTAL", #residential and C&I
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Utility)))
+
+
+totals <- data %>% 
+  filter(Size!="HES",
+         Cat!="TOTAL") %>% 
+  group_by(Utility,Year,Size,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size!="HES", #large and small
+         Cat!="TOTAL", #residential and C&I
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Utility,Year,Size,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Size),rows=vars(Cat)))
+
+```
+
+
+### HES and HES-IE
+
+It makes sense that distribution of HES-IE funds would be greater to distressed census tracts, but overall funds are not equitably distributed under HES program. Moderate distress appears to participate in HES-IE.
+
+- HES-IE: Home Energy Solutions, income-eligible
+
+- Moderately distressed tracts: median income 60-80% state median income
+
+```{r}
+totals <- data %>% 
+  filter(Size=="HES") %>% 
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)/2) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size=="HES",
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)/2) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Utility))+
+        labs(title="Distressed communities, HES & HES-IE total"))
+
+
+
+totals <- data %>% 
+  filter(Size=="HES") %>% 
+  group_by(Utility,Year,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size=="HES",
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Utility,Year,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Utility),rows=vars(Cat))+
+        labs(title="Distressed communities, HES & HES-IE"))
+
+
+
+totals <- data %>% 
+  filter(Size=="HES") %>% 
+  group_by(Utility,Year,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size=="HES", 
+         Moderate.distress=="YES") %>%  #moderately distressed
+  group_by(Utility,Year,Cat) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Utility),rows=vars(Cat))+
+        labs(title="Moderately distressed communities, HES & HES-IE"))
+
+```
+
+
+### Justice40 disadvantaged
+
+Justice40 requires that 40% of funds flow to disadvantaged communities, which make up approximately 29% of the country. This means that these communities should receive 1.3x the average proportional investment.
+
+- Disadvantaged: Communities that are marginalized, underserved, and overburdened by pollution. Burden thresholds include climate change, energy, health, housing, legacy pollution, transportation, water and wastewater, and workforce development.
+
+- Black lines in the chart show targets based on 40% of budget and 1.3x proportional investment.
+
+```{r}
+
+totals <- data %>% 
+  filter(Size!="HES",
+         Cat=="TOTAL") %>% 
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size!="HES", #large and small
+         Cat=="TOTAL", #residential and C&I
+         `Justice40.disadvantaged`=="TRUE") %>%  #distressed
+  group_by(Utility,Year) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(collections,disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
+         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
+         equitable=case_when(collections>disbursements ~ "NO",
+                             collections<disbursements ~ "YES")) #this is the comparison
+
+print(tab)
+
+tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Cat",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Cat))+
+        geom_line()+
+        geom_point(shape=4)+
+        geom_hline(yintercept=40)+
+        geom_line(data=tab[tab$Cat=="collections",],aes(x=Year,y=Pct*1.3),color="black")+
+        facet_grid(cols=vars(Utility)))
+
+```
+
+
+## Maps & Baselines
+
+```{r}
+
+by.tract <- data %>% 
+  filter(Cat != "total",
+         Size != "HES") %>% 
+  group_by(`Census Tract`,Year) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(-Size,-Cat) %>% 
+  ungroup() %>% 
+  distinct()
+
+```
+
+### Median household income
+
+- Low: <60% of state median income
+- Moderate: 60-80% of state median income
+- High: >80% state median income
+
+Must exceed baseline to be considered equitable.
+Baseline is proportional investment based on portion of census tracts that fall under each category.
+
+```{r, results='hide'}
+
+med_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001",
+  state = "CT", 
+  year = 2020,
+  geometry = TRUE
+)
+
+ggplot(data = med_income, aes(fill = estimate/66270*100)) + 
+  geom_sf(colour="white",lwd=0) + 
+  scale_fill_viridis(option="viridis")+
+  labs(title = "Median Household Income by Census Tract, 2020",
+       caption = "Data source: 2020 1-year ACS, US Census Bureau",
+       fill = "% state median income")+
+  theme_minimal()+
+  theme(axis.line = element_blank(), axis.text = element_blank(),
+        axis.ticks = element_blank(), axis.title = element_blank())
+
+med_income <- med_income %>% 
+  mutate(cat=case_when(
+    estimate/66270<=0.6~"low",
+    between(estimate/66270,0.6,0.8)~"moderate",
+    estimate/66270>=0.8~"high"
+  )) %>% 
+  rename("Census Tract"="GEOID") %>%
+  mutate(`Census Tract` = as.numeric(`Census Tract`))
+
+ggplot(med_income) +
+  geom_histogram(aes(x=estimate),bins=30)+
+  geom_vline(xintercept=66270)+
+  labs(caption="vertical line denotes state median income of $66,270")
+
+med_income$cat <- factor(med_income$cat, levels = c("low","moderate","high"))
+
+ggplot(med_income)+
+  geom_bar(aes(x=cat),stat="count")
+
+low.t <- length(which(med_income$cat=="low"))/length(med_income$cat)
+mod.t <- length(which(med_income$cat=="moderate"))/length(med_income$cat)
+high.t <- length(which(med_income$cat=="high"))/length(med_income$cat)
+
+
+med_income.join <- left_join(by.tract,med_income,all.y=TRUE) %>% 
+  group_by(Year,cat,Utility) %>% 
+  mutate(collections=sum(collections)) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(Year,cat,Utility,collections,disbursements)%>% 
+  distinct() %>% 
+  filter(is.na(cat)==FALSE)
+
+totals <- med_income.join %>% 
+  group_by(Year,Utility) %>% 
+  mutate(disbursements=sum(disbursements)) %>% 
+  select(Year,Utility,disbursements) %>% 
+  distinct() %>% 
+  mutate(low=disbursements*low.t,
+         moderate=disbursements*mod.t,
+         high=disbursements*high.t) %>% 
+  select(-disbursements)
+
+totals<-pivot_longer(totals,cols=c("low","moderate","high"),names_to="cat",values_to="baseline")
+
+med_income.join <- left_join(med_income.join,totals)
+
+med_income.join$cat <- factor(med_income.join$cat, levels = c("low","moderate","high"))
+
+ggplot(med_income.join, aes(y=disbursements,x=cat,fill=Utility))+
+  geom_bar(stat="identity",position="dodge")+
+  geom_errorbar(aes(ymin=baseline,ymax=baseline),width=1,position=position_dodge(0.9))+
+  facet_grid(cols=vars(Year),rows=vars(Utility))+
+  labs(caption="Black line denotes baseline")
+
+
+  
+```
+
+### Racial diversity
+```{r, results='hide'}
+
+ggplot(data = race, aes(fill = percent)) + 
+  geom_sf(colour="white",lwd=0) + 
+  scale_fill_viridis(option="viridis")+
+  labs(title = "Percent Population of Color by Census Tract, 2020",
+       caption = "Data source: 2020 ACS, US Census Bureau",
+       fill = "% POC estimate")+
+  theme_minimal()+
+  theme(axis.line = element_blank(), axis.text = element_blank(),
+        axis.ticks = element_blank(), axis.title = element_blank())
+
+hist(race$percent)
+
+```
+
+### Energy burden
+
+```{r, results='hide'}
+
+LEAD <- read.csv("C:/Users/xiesa/OneDrive - State of Connecticut/2019-2021 Equitable/LEAD.csv") 
+census_tracts <- tracts("CT",cb=TRUE,year="2010") %>% mutate(census_tract=as.numeric(paste(STATE,COUNTY,TRACT,sep="")))
+
+LEAD <- LEAD %>% rename(census_tract=Geography.ID)
+LEAD.joined <- left_join(census_tracts,LEAD,by="census_tract") %>% 
+  filter( Avg..Energy.Burden....income. <100)
+
+ggplot(data = LEAD.joined, aes(fill = Avg..Energy.Burden....income.)) + 
+  geom_sf(colour="white",lwd=0) + 
+  scale_fill_viridis(option="viridis")+
+  labs(title = "Average Energy Burden by Census Tract, 2016",
+       caption = "Data source: Low-Income Energy Affordability Data Tool",
+       fill = "% of income")+
+  theme_minimal()+
+  theme(axis.line = element_blank(), axis.text = element_blank(),
+        axis.ticks = element_blank(), axis.title = element_blank())
+
+```
+
+### Disbursements & Collections
+
+```{r fig.width=10,fig.height=10}
+
+data.joined <- left_join(census_tracts,data,by=c("census_tract"="Census Tract")) %>% filter(Size!="HES",Cat=="TOTAL") %>% select(-Size) %>% group_by(census_tract,Year) %>% mutate(collections=sum(collections),disbursements=sum(disbursements)) %>% distinct()
+
+b <- c(-Inf,1.35,Inf)
+colors <- c('navyblue', 'orange', 'darkorange1')
+
+data.joined<-pivot_longer(data.joined,cols=c("collections","disbursements"),names_to="Category",values_to="Value")
+
+ggplot(data = data.joined, aes(fill = Value)) + 
+  geom_sf(colour="white",lwd=0) + 
+  scale_fill_viridis(option="viridis")+
+  labs(title = "Proportion by Census Tract",
+       caption = "Data source: C&LM program",
+       fill = "$")+
+  theme_minimal()+
+  theme(axis.line = element_blank(), axis.text = element_blank(),
+        axis.ticks = element_blank(), axis.title = element_blank())+
+  facet_grid(cols=vars(Category),rows=vars(Year))
+
+
+```

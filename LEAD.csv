@@ -1,0 +1,826 @@
+Geography ID, Name,County,Tribal Areas,Avg. Energy Burden (% income)
+9001100100,Census Tract 1001,Fairfield County,,3
+9001100200,Census Tract 1002,Fairfield County,,3
+9001010101,Census Tract 101.01,Fairfield County,,2
+9001010102,Census Tract 101.02,Fairfield County,,2
+9001010201,Census Tract 102.01,Fairfield County,,2
+9001010202,Census Tract 102.02,Fairfield County,,2
+9001010300,Census Tract 103,Fairfield County,,2
+9001105100,Census Tract 1051,Fairfield County,,2
+9001105200,Census Tract 1052,Fairfield County,,2
+9001010500,Census Tract 105,Fairfield County,,3
+9001010600,Census Tract 106,Fairfield County,,1
+9001010700,Census Tract 107,Fairfield County,,2
+9001010800,Census Tract 108,Fairfield County,,2
+9001010900,Census Tract 109,Fairfield County,,2
+9001110201,Census Tract 1102.01,Fairfield County,,4
+9001110202,Census Tract 1102.02,Fairfield County,,4
+9001110302,Census Tract 1103.02,Fairfield County,,4
+9001110400,Census Tract 1104,Fairfield County,,3
+9001110500,Census Tract 1105,Fairfield County,,3
+9001110600,Census Tract 1106,Fairfield County,,3
+9001011000,Census Tract 110,Fairfield County,,2
+9001011100,Census Tract 111,Fairfield County,,2
+9001011200,Census Tract 112,Fairfield County,,2
+9001011300,Census Tract 113,Fairfield County,,2
+9009120100,Census Tract 1201,New Haven County,,4
+9009120200,Census Tract 1202,New Haven County,,6
+9009130101,Census Tract 1301.01,New Haven County,,4
+9009130102,Census Tract 1301.02,New Haven County,,4
+9009150100,Census Tract 1501,New Haven County,,3
+9009150200,Census Tract 1502,New Haven County,,4
+9009151000,Census Tract 1510,New Haven County,,3
+9009166001,Census Tract 1660.01,New Haven County,,3
+9009166002,Census Tract 1660.02,New Haven County,,3
+9009167300,Census Tract 1673,New Haven County,,3
+9009170200,Census Tract 1702,New Haven County,,5
+9009170300,Census Tract 1703,New Haven County,,5
+9009170400,Census Tract 1704,New Haven County,,4
+9009175600,Census Tract 1756,New Haven County,,2
+9009175700,Census Tract 1757,New Haven County,,3
+9009175900,Census Tract 1759,New Haven County,,2
+9009180200,Census Tract 1802,New Haven County,,4
+9009180300,Census Tract 1803,New Haven County,,5
+9009180400,Census Tract 1804,New Haven County,,3
+9009180500,Census Tract 1805,New Haven County,,3
+9009180601,Census Tract 1806.01,New Haven County,,5
+9009180602,Census Tract 1806.02,New Haven County,,4
+9009184100,Census Tract 1841,New Haven County,,4
+9009184400,Census Tract 1844,New Haven County,,3
+9009184500,Census Tract 1845,New Haven County,,3
+9009184600,Census Tract 1846,New Haven County,,3
+9009184700,Census Tract 1847,New Haven County,,3
+9009190303,Census Tract 1903.03,New Haven County,,3
+9009194202,Census Tract 1942.02,New Haven County,,3
+9001200100,Census Tract 2001,Fairfield County,,3
+9001200200,Census Tract 2002,Fairfield County,,4
+9001200301,Census Tract 2003.01,Fairfield County,,3
+9001020100,Census Tract 201,Fairfield County,,2
+9001020300,Census Tract 203,Fairfield County,,2
+9001020400,Census Tract 204,Fairfield County,,2
+9001205100,Census Tract 2051,Fairfield County,,3
+9001205200,Census Tract 2052,Fairfield County,,3
+9001205300,Census Tract 2053,Fairfield County,,3
+9001020500,Census Tract 205,Fairfield County,,2
+9001020600,Census Tract 206,Fairfield County,,2
+9001020800,Census Tract 208,Fairfield County,,2
+9001020900,Census Tract 209,Fairfield County,,3
+9001210100,Census Tract 2101,Fairfield County,,5
+9001210200,Census Tract 2102,Fairfield County,,6
+9001210500,Census Tract 2105,Fairfield County,,3
+9001210600,Census Tract 2106,Fairfield County,,5
+9001210800,Census Tract 2108,Fairfield County,,3
+9001210900,Census Tract 2109,Fairfield County,,3
+9001021000,Census Tract 210,Fairfield County,,2
+9001211000,Census Tract 2110,Fairfield County,,4
+9001211200,Census Tract 2112,Fairfield County,,4
+9001021200,Census Tract 212,Fairfield County,,2
+9001021400,Census Tract 214,Fairfield County,,4
+9001220200,Census Tract 2202,Fairfield County,,3
+9001230100,Census Tract 2301,Fairfield County,,3
+9001230200,Census Tract 2302,Fairfield County,,3
+9001230300,Census Tract 2303,Fairfield County,,3
+9001230400,Census Tract 2304,Fairfield County,,3
+9001230501,Census Tract 2305.01,Fairfield County,,3
+9001230502,Census Tract 2305.02,Fairfield County,,3
+9001240100,Census Tract 2401,Fairfield County,,3
+9001240200,Census Tract 2402,Fairfield County,,3
+9001245100,Census Tract 2451,Fairfield County,,2
+9001245200,Census Tract 2452,Fairfield County,,2
+9001245400,Census Tract 2454,Fairfield County,,2
+9001245500,Census Tract 2455,Fairfield County,,2
+9001245600,Census Tract 2456,Fairfield County,,2
+9005253200,Census Tract 2532,Litchfield County,,3
+9005253400,Census Tract 2534,Litchfield County,,3
+9005253500,Census Tract 2535,Litchfield County,,3
+9001257100,Census Tract 2571,Fairfield County,,3
+9005261100,Census Tract 2611,Litchfield County,,4
+9005263200,Census Tract 2632,Litchfield County,,5
+9005296100,Census Tract 2961,Litchfield County,,4
+9005300100,Census Tract 3001,Litchfield County,,4
+9005300400,Census Tract 3004,Litchfield County,,4
+9005300500,Census Tract 3005,Litchfield County,,4
+9001030100,Census Tract 301,Fairfield County,,2
+9001030200,Census Tract 302,Fairfield County,,2
+9001030500,Census Tract 305,Fairfield County,,2
+9005306100,Census Tract 3061,Litchfield County,,3
+9005310601,Census Tract 3106.01,Litchfield County,,3
+9005320100,Census Tract 3201,Litchfield County,,4
+9009341100,Census Tract 3411,New Haven County,,3
+9009343200,Census Tract 3432,New Haven County,,3
+9009346102,Census Tract 3461.02,New Haven County,,3
+9005349100,Census Tract 3491,Litchfield County,,4
+9005349200,Census Tract 3492,Litchfield County,,5
+9009350100,Census Tract 3501,New Haven County,,8
+9009350200,Census Tract 3502,New Haven County,,8
+9009350300,Census Tract 3503,New Haven County,,8
+9009350400,Census Tract 3504,New Haven County,,10
+9009350500,Census Tract 3505,New Haven County,,9
+9009350800,Census Tract 3508,New Haven County,,7
+9009350900,Census Tract 3509,New Haven County,,5
+9009351000,Census Tract 3510,New Haven County,,5
+9009351100,Census Tract 3511,New Haven County,,7
+9009351200,Census Tract 3512,New Haven County,,8
+9009351300,Census Tract 3513,New Haven County,,6
+9009351400,Census Tract 3514,New Haven County,,7
+9009351800,Census Tract 3518,New Haven County,,5
+9001035100,Census Tract 351,Fairfield County,,2
+9009352701,Census Tract 3527.01,New Haven County,,6
+9009352702,Census Tract 3527.02,New Haven County,,4
+9009352800,Census Tract 3528,New Haven County,,5
+9001035200,Census Tract 352,Fairfield County,,2
+9001035400,Census Tract 354,Fairfield County,,2
+9009361500,Census Tract 3615,New Haven County,,5
+9001042500,Census Tract 425,Fairfield County,,2
+9001042700,Census Tract 427,Fairfield County,,2
+9001042800,Census Tract 428,Fairfield County,,3
+9001043100,Census Tract 431,Fairfield County,,2
+9001043200,Census Tract 432,Fairfield County,,3
+9001043300,Census Tract 433,Fairfield County,,3
+9001045102,Census Tract 451.02,Fairfield County,,2
+9001045200,Census Tract 452,Fairfield County,,2
+9001045400,Census Tract 454,Fairfield County,,2
+9003473100,Census Tract 4731,Hartford County,,3
+9001050200,Census Tract 502,Fairfield County,,2
+9001050500,Census Tract 505,Fairfield County,,2
+9001055100,Census Tract 551,Fairfield County,,2
+9001055200,Census Tract 552,Fairfield County,,2
+9001060100,Census Tract 601,Fairfield County,,2
+9001060200,Census Tract 602,Fairfield County,,2
+9001060300,Census Tract 603,Fairfield County,,2
+9001060400,Census Tract 604,Fairfield County,,2
+9001073100,Census Tract 731,Fairfield County,,4
+9001073900,Census Tract 739,Fairfield County,,7
+9015800300,Census Tract 8003,Windham County,,6
+9015800400,Census Tract 8004,Windham County,,5
+9015800600,Census Tract 8006,Windham County,,8
+9001080400,Census Tract 804,Fairfield County,,5
+9001081000,Census Tract 810,Fairfield County,,5
+9001081100,Census Tract 811,Fairfield County,,3
+9001081200,Census Tract 812,Fairfield County,,3
+9001081300,Census Tract 813,Fairfield County,,3
+9015830100,Census Tract 8301,Windham County,,4
+9015900100,Census Tract 9001,Windham County,,4
+9015901100,Census Tract 9011,Windham County,,4
+9001090100,Census Tract 901,Fairfield County,,2
+9015902500,Census Tract 9025,Windham County,,3
+9001090200,Census Tract 902,Fairfield County,,3
+9015903100,Census Tract 9031,Windham County,,5
+9015904100,Census Tract 9041,Windham County,,4
+9015904500,Census Tract 9045,Windham County,,5
+9001090400,Census Tract 904,Fairfield County,,3
+9015905100,Census Tract 9051,Windham County,,4
+9001090500,Census Tract 905,Fairfield County,,3
+9001090600,Census Tract 906,Fairfield County,Golden Hill Paugussett (state) Reservation,3
+9015907100,Census Tract 9071,Windham County,,5
+9001100300,Census Tract 1003,Fairfield County,,3
+9001010400,Census Tract 104,Fairfield County,,2
+9001110100,Census Tract 1101,Fairfield County,,3
+9001110301,Census Tract 1103.01,Fairfield County,,3
+9009125100,Census Tract 1251,New Haven County,,4
+9009125200,Census Tract 1252,New Haven County,,5
+9009125300,Census Tract 1253,New Haven County,,5
+9009125400,Census Tract 1254,New Haven County,,5
+9009130200,Census Tract 1302,New Haven County,,4
+9009140100,Census Tract 1401,New Haven County,,1
+9009140200,Census Tract 1402,New Haven County,,8
+9009140300,Census Tract 1403,New Haven County,,8
+9009140400,Census Tract 1404,New Haven County,,5
+9009140500,Census Tract 1405,New Haven County,,8
+9009140600,Census Tract 1406,New Haven County,,6
+9009140700,Census Tract 1407,New Haven County,,6
+9009140800,Census Tract 1408,New Haven County,,5
+9009140900,Census Tract 1409,New Haven County,,5
+9009141000,Census Tract 1410,New Haven County,,3
+9009141100,Census Tract 1411,New Haven County,,3
+9009141200,Census Tract 1412,New Haven County,,5
+9009141300,Census Tract 1413,New Haven County,,5
+9009141400,Census Tract 1414,New Haven County,,4
+9009141500,Census Tract 1415,New Haven County,,10
+9009141600,Census Tract 1416,New Haven County,,6
+9009141800,Census Tract 1418,New Haven County,,3
+9009141900,Census Tract 1419,New Haven County,,3
+9009142000,Census Tract 1420,New Haven County,,3
+9009142100,Census Tract 1421,New Haven County,,5
+9009142200,Census Tract 1422,New Haven County,,3
+9009142300,Census Tract 1423,New Haven County,,6
+9009142400,Census Tract 1424,New Haven County,,7
+9009142500,Census Tract 1425,New Haven County,,6
+9009142601,Census Tract 1426.01,New Haven County,,5
+9009142603,Census Tract 1426.03,New Haven County,,4
+9009142604,Census Tract 1426.04,New Haven County,,5
+9009142700,Census Tract 1427,New Haven County,,7
+9009142800,Census Tract 1428,New Haven County,,4
+9009150300,Census Tract 1503,New Haven County,,4
+9009150400,Census Tract 1504,New Haven County,,4
+9009150500,Census Tract 1505,New Haven County,,4
+9009150600,Census Tract 1506,New Haven County,,3
+9009150700,Census Tract 1507,New Haven County,,3
+9009150800,Census Tract 1508,New Haven County,,3
+9009150900,Census Tract 1509,New Haven County,,3
+9009151100,Census Tract 1511,New Haven County,,3
+9009151200,Census Tract 1512,New Haven County,,3
+9009154100,Census Tract 1541,New Haven County,,4
+9009154200,Census Tract 1542,New Haven County,,5
+9009154500,Census Tract 1545,New Haven County,,5
+9009154600,Census Tract 1546,New Haven County,,5
+9009154700,Census Tract 1547,New Haven County,,3
+9009154800,Census Tract 1548,New Haven County,,3
+9009154900,Census Tract 1549,New Haven County,,4
+9009155000,Census Tract 1550,New Haven County,,4
+9009155100,Census Tract 1551,New Haven County,,5
+9009157100,Census Tract 1571,New Haven County,,3
+9009157200,Census Tract 1572,New Haven County,,3
+9009157300,Census Tract 1573,New Haven County,,3
+9009157400,Census Tract 1574,New Haven County,,3
+9009160100,Census Tract 1601,New Haven County,,3
+9009160200,Census Tract 1602,New Haven County,,3
+9009161100,Census Tract 1611,New Haven County,,3
+9009165100,Census Tract 1651,New Haven County,,4
+9009165200,Census Tract 1652,New Haven County,,2
+9009165300,Census Tract 1653,New Haven County,,2
+9009165400,Census Tract 1654,New Haven County,,3
+9009165500,Census Tract 1655,New Haven County,,6
+9009165600,Census Tract 1656,New Haven County,,4
+9009165700,Census Tract 1657,New Haven County,,4
+9009165801,Census Tract 1658.01,New Haven County,,3
+9009165802,Census Tract 1658.02,New Haven County,,4
+9009165900,Census Tract 1659,New Haven County,,3
+9009167100,Census Tract 1671,New Haven County,,3
+9009167201,Census Tract 1672.01,New Haven County,,3
+9009167202,Census Tract 1672.02,New Haven County,,3
+9009170100,Census Tract 1701,New Haven County,,6
+9009170500,Census Tract 1705,New Haven County,,3
+9009170600,Census Tract 1706,New Haven County,,4
+9009170700,Census Tract 1707,New Haven County,,4
+9009170800,Census Tract 1708,New Haven County,,4
+9009170900,Census Tract 1709,New Haven County,,5
+9009171000,Census Tract 1710,New Haven County,,5
+9009171100,Census Tract 1711,New Haven County,,4
+9009171200,Census Tract 1712,New Haven County,,3
+9009171300,Census Tract 1713,New Haven County,,4
+9009171400,Census Tract 1714,New Haven County,,5
+9009171500,Census Tract 1715,New Haven County,,5
+9009171600,Census Tract 1716,New Haven County,,4
+9009171700,Census Tract 1717,New Haven County,,3
+9009175100,Census Tract 1751,New Haven County,,3
+9009175200,Census Tract 1752,New Haven County,,2
+9009175300,Census Tract 1753,New Haven County,,3
+9009175400,Census Tract 1754,New Haven County,,3
+9009175500,Census Tract 1755,New Haven County,,3
+9009175800,Census Tract 1758,New Haven County,,3
+9009176000,Census Tract 1760,New Haven County,,3
+9009180100,Census Tract 1801,New Haven County,,4
+9009184200,Census Tract 1842,New Haven County,,4
+9009184300,Census Tract 1843,New Haven County,,3
+9009186100,Census Tract 1861,New Haven County,,3
+9009186200,Census Tract 1862,New Haven County,,3
+9009190100,Census Tract 1901,New Haven County,,3
+9009190200,Census Tract 1902,New Haven County,,3
+9009190301,Census Tract 1903.01,New Haven County,,3
+9009190302,Census Tract 1903.02,New Haven County,,3
+9009194100,Census Tract 1941,New Haven County,,4
+9009194201,Census Tract 1942.01,New Haven County,,3
+9001200302,Census Tract 2003.02,Fairfield County,,3
+9001020200,Census Tract 202,Fairfield County,,2
+9001020700,Census Tract 207,Fairfield County,,2
+9001210300,Census Tract 2103,Fairfield County,,4
+9001210400,Census Tract 2104,Fairfield County,,3
+9001210701,Census Tract 2107.01,Fairfield County,,5
+9001210702,Census Tract 2107.02,Fairfield County,,5
+9001211100,Census Tract 2111,Fairfield County,,3
+9001211300,Census Tract 2113,Fairfield County,,3
+9001211400,Census Tract 2114,Fairfield County,,3
+9001021100,Census Tract 211,Fairfield County,,2
+9001021300,Census Tract 213,Fairfield County,,2
+9001021600,Census Tract 216,Fairfield County,,2
+9001021700,Census Tract 217,Fairfield County,,2
+9001021801,Census Tract 218.01,Fairfield County,,2
+9001021802,Census Tract 218.02,Fairfield County,,3
+9001220100,Census Tract 2201,Fairfield County,,3
+9001220300,Census Tract 2203,Fairfield County,,4
+9001022200,Census Tract 222,Fairfield County,,2
+9001022300,Census Tract 223,Fairfield County,,3
+9001022400,Census Tract 224,Fairfield County,,2
+9001245300,Census Tract 2453,Fairfield County,,2
+9005250100,Census Tract 2501,Litchfield County,,3
+9005253100,Census Tract 2531,Litchfield County,,4
+9005253300,Census Tract 2533,Litchfield County,,4
+9005253600,Census Tract 2536,Litchfield County,,5
+9005260200,Census Tract 2602,Litchfield County,,4
+9005262100,Census Tract 2621,Litchfield County,,4
+9005265100,Census Tract 2651,Litchfield County,,4
+9005266100,Census Tract 2661,Litchfield County,Schaghticoke (state) Reservation,4
+9005267100,Census Tract 2671,Litchfield County,,4
+9005268100,Census Tract 2681,Litchfield County,,3
+9005290100,Census Tract 2901,Litchfield County,,3
+9005293100,Census Tract 2931,Litchfield County,,4
+9005298300,Census Tract 2983,Litchfield County,,3
+9005298400,Census Tract 2984,Litchfield County,,3
+9005303100,Census Tract 3031,Litchfield County,,4
+9001030400,Census Tract 304,Fairfield County,,2
+9005310100,Census Tract 3101,Litchfield County,,5
+9005310200,Census Tract 3102,Litchfield County,,5
+9005310300,Census Tract 3103,Litchfield County,,6
+9005310400,Census Tract 3104,Litchfield County,,4
+9005310500,Census Tract 3105,Litchfield County,,5
+9005310602,Census Tract 3106.02,Litchfield County,,4
+9005310700,Census Tract 3107,Litchfield County,,5
+9005310801,Census Tract 3108.01,Litchfield County,,5
+9005310803,Census Tract 3108.03,Litchfield County,,6
+9005310804,Census Tract 3108.04,Litchfield County,,4
+9005320200,Census Tract 3202,Litchfield County,,4
+9003330100,Census Tract 3301,Hartford County,,3
+9005342100,Census Tract 3421,Litchfield County,,4
+9009343101,Census Tract 3431.01,New Haven County,,3
+9009343102,Census Tract 3431.02,New Haven County,,3
+9009343300,Census Tract 3433,New Haven County,,3
+9009343400,Census Tract 3434,New Haven County,,3
+9009344100,Census Tract 3441,New Haven County,,3
+9009344200,Census Tract 3442,New Haven County,,3
+9009345100,Census Tract 3451,New Haven County,,4
+9009345201,Census Tract 3452.01,New Haven County,,4
+9009345202,Census Tract 3452.02,New Haven County,,3
+9009345300,Census Tract 3453,New Haven County,,4
+9009345400,Census Tract 3454,New Haven County,,4
+9009346101,Census Tract 3461.01,New Haven County,,3
+9009347100,Census Tract 3471,New Haven County,,3
+9009347200,Census Tract 3472,New Haven County,,3
+9009348111,Census Tract 3481.11,New Haven County,,3
+9009348122,Census Tract 3481.22,New Haven County,,3
+9009348123,Census Tract 3481.23,New Haven County,,3
+9009348124,Census Tract 3481.24,New Haven County,,4
+9009348125,Census Tract 3481.25,New Haven County,,4
+9009351602,Census Tract 3516.02,New Haven County,,5
+9009351700,Census Tract 3517,New Haven County,,9
+9009351900,Census Tract 3519,New Haven County,,4
+9009352000,Census Tract 3520,New Haven County,,4
+9009352100,Census Tract 3521,New Haven County,,5
+9009352200,Census Tract 3522,New Haven County,,8
+9009352300,Census Tract 3523,New Haven County,,6
+9009352400,Census Tract 3524,New Haven County,,6
+9009352500,Census Tract 3525,New Haven County,,5
+9009352600,Census Tract 3526,New Haven County,,6
+9005360200,Census Tract 3602,Litchfield County,,3
+9005360300,Census Tract 3603,Litchfield County,,4
+9005360400,Census Tract 3604,Litchfield County,,5
+9009361100,Census Tract 3611,New Haven County,,4
+9009361200,Census Tract 3612,New Haven County,,4
+9009361402,Census Tract 3614.02,New Haven County,,4
+9003400200,Census Tract 4002,Hartford County,,3
+9003405100,Census Tract 4051,Hartford County,,4
+9003405300,Census Tract 4053,Hartford County,,4
+9003405500,Census Tract 4055,Hartford County,,4
+9003405600,Census Tract 4056,Hartford County,,5
+9003405800,Census Tract 4058,Hartford County,,3
+9003405900,Census Tract 4059,Hartford County,,3
+9003406001,Census Tract 4060.01,Hartford County,,5
+9003406100,Census Tract 4061,Hartford County,,5
+9003410101,Census Tract 4101.01,Hartford County,,3
+9003410102,Census Tract 4101.02,Hartford County,,3
+9003415400,Census Tract 4154,Hartford County,,6
+9003416500,Census Tract 4165,Hartford County,,4
+9003420600,Census Tract 4206,Hartford County,,4
+9003420700,Census Tract 4207,Hartford County,,4
+9005425400,Census Tract 4254,Litchfield County,,4
+9005425500,Census Tract 4255,Litchfield County,,4
+9005425600,Census Tract 4256,Litchfield County,,4
+9001042600,Census Tract 426,Fairfield County,,3
+9001042900,Census Tract 429,Fairfield County,,2
+9003430100,Census Tract 4301,Hartford County,,3
+9003430202,Census Tract 4302.02,Hartford County,,3
+9003430301,Census Tract 4303.01,Hartford County,,3
+9003430400,Census Tract 4304,Hartford County,,3
+9003430500,Census Tract 4305,Hartford County,,3
+9003430601,Census Tract 4306.01,Hartford County,,4
+9001043000,Census Tract 430,Fairfield County,,2
+9001043400,Census Tract 434,Fairfield County,,3
+9001043500,Census Tract 435,Fairfield County,,3
+9001043600,Census Tract 436,Fairfield County,,3
+9001043700,Census Tract 437,Fairfield County,,2
+9001043800,Census Tract 438,Fairfield County,,3
+9001043900,Census Tract 439,Fairfield County,,3
+9001044000,Census Tract 440,Fairfield County,,4
+9001044100,Census Tract 441,Fairfield County,,2
+9001044200,Census Tract 442,Fairfield County,,2
+9001044300,Census Tract 443,Fairfield County,,2
+9001044400,Census Tract 444,Fairfield County,,2
+9001044500,Census Tract 445,Fairfield County,,2
+9001044600,Census Tract 446,Fairfield County,,2
+9001045101,Census Tract 451.01,Fairfield County,,2
+9003460202,Census Tract 4602.02,Hartford County,,2
+9003460204,Census Tract 4602.04,Hartford County,,2
+9003460302,Census Tract 4603.02,Hartford County,,3
+9003462101,Census Tract 4621.01,Hartford County,,2
+9003462102,Census Tract 4621.02,Hartford County,,2
+9003464101,Census Tract 4641.01,Hartford County,,3
+9003466102,Census Tract 4661.02,Hartford County,,2
+9003466202,Census Tract 4662.02,Hartford County,,2
+9003466300,Census Tract 4663,Hartford County,,2
+9003468101,Census Tract 4681.01,Hartford County,,3
+9003468102,Census Tract 4681.02,Hartford County,,3
+9003470100,Census Tract 4701,Hartford County,,3
+9003471300,Census Tract 4713,Hartford County,,3
+9003471400,Census Tract 4714,Hartford County,,3
+9003473501,Census Tract 4735.01,Hartford County,,3
+9003473502,Census Tract 4735.02,Hartford County,,3
+9003476100,Census Tract 4761,Hartford County,,4
+9003476300,Census Tract 4763,Hartford County,,4
+9003481000,Census Tract 4810,Hartford County,,3
+9003481100,Census Tract 4811,Hartford County,,3
+9003484100,Census Tract 4841,Hartford County,,4
+9003487100,Census Tract 4871,Hartford County,,2
+9003487400,Census Tract 4874,Hartford County,,3
+9003496400,Census Tract 4964,Hartford County,,2
+9003496500,Census Tract 4965,Hartford County,,2
+9003496600,Census Tract 4966,Hartford County,,2
+9003496700,Census Tract 4967,Hartford County,,3
+9003496800,Census Tract 4968,Hartford County,,4
+9003496900,Census Tract 4969,Hartford County,,3
+9003497000,Census Tract 4970,Hartford County,,2
+9003497100,Census Tract 4971,Hartford County,,2
+9003497200,Census Tract 4972,Hartford County,,2
+9003497300,Census Tract 4973,Hartford County,,2
+9003497400,Census Tract 4974,Hartford County,,2
+9003497500,Census Tract 4975,Hartford County,,3
+9003497600,Census Tract 4976,Hartford County,,2
+9003500100,Census Tract 5001,Hartford County,,9
+9003500500,Census Tract 5005,Hartford County,,3
+9003501400,Census Tract 5014,Hartford County,,8
+9003501800,Census Tract 5018,Hartford County,,10
+9003502100,Census Tract 5021,Hartford County,,2
+9003502500,Census Tract 5025,Hartford County,,6
+9003502600,Census Tract 5026,Hartford County,,7
+9003502700,Census Tract 5027,Hartford County,,7
+9003502800,Census Tract 5028,Hartford County,,8
+9003502900,Census Tract 5029,Hartford County,,5
+9003503000,Census Tract 5030,Hartford County,,7
+9003503100,Census Tract 5031,Hartford County,,5
+9003503700,Census Tract 5037,Hartford County,,7
+9003503800,Census Tract 5038,Hartford County,,11
+9001050300,Census Tract 503,Fairfield County,,2
+9001050400,Census Tract 504,Fairfield County,,3
+9001050600,Census Tract 506,Fairfield County,,2
+9003510600,Census Tract 5106,Hartford County,,5
+9003514400,Census Tract 5144,Hartford County,,4
+9003514500,Census Tract 5145,Hartford County,,4
+9003514600,Census Tract 5146,Hartford County,,4
+9003514700,Census Tract 5147,Hartford County,,5
+9003514800,Census Tract 5148,Hartford County,,6
+9003514900,Census Tract 5149,Hartford County,,4
+9003515000,Census Tract 5150,Hartford County,,3
+9003515102,Census Tract 5151.02,Hartford County,,3
+9003515200,Census Tract 5152,Hartford County,,3
+9003520201,Census Tract 5202.01,Hartford County,,2
+9003520501,Census Tract 5205.01,Hartford County,,2
+9003524501,Census Tract 5245.01,Hartford County,,4
+9013528100,Census Tract 5281,Tolland County,,3
+9013530600,Census Tract 5306,Tolland County,,3
+9013535200,Census Tract 5352,Tolland County,,3
+9013538202,Census Tract 5382.02,Tolland County,,3
+9007580100,Census Tract 5801,Middlesex County,,3
+9001060600,Census Tract 606,Fairfield County,,2
+9001060700,Census Tract 607,Fairfield County,,2
+9001060800,Census Tract 608,Fairfield County,,2
+9001060900,Census Tract 609,Fairfield County,,2
+9001072900,Census Tract 729,Fairfield County,,5
+9001074000,Census Tract 740,Fairfield County,,7
+9015820000,Census Tract 8200,Windham County,,4
+9015825000,Census Tract 8250,Windham County,,4
+9013840100,Census Tract 8401,Tolland County,,4
+9013860100,Census Tract 8601,Tolland County,,3
+9013881200,Census Tract 8812,Tolland County,,3
+9013881300,Census Tract 8813,Tolland County,,4
+9001021500,Census Tract 215,Fairfield County,,4
+9001021900,Census Tract 219,Fairfield County,,3
+9001022000,Census Tract 220,Fairfield County,,4
+9001022100,Census Tract 221,Fairfield County,,3
+9001257200,Census Tract 2572,Fairfield County,,6
+9001030300,Census Tract 303,Fairfield County,,2
+9009351500,Census Tract 3515,New Haven County,,5
+9009351601,Census Tract 3516.01,New Haven County,,6
+9001035300,Census Tract 353,Fairfield County,,2
+9005360100,Census Tract 3601,Litchfield County,,4
+9009361300,Census Tract 3613,New Haven County,,4
+9009361401,Census Tract 3614.01,New Haven County,,3
+9005362101,Census Tract 3621.01,Litchfield County,,4
+9005362102,Census Tract 3621.02,Litchfield County,,4
+9003400100,Census Tract 4001,Hartford County,,3
+9003400300,Census Tract 4003,Hartford County,,3
+9003405200,Census Tract 4052,Hartford County,,4
+9003405401,Census Tract 4054.01,Hartford County,,3
+9003405402,Census Tract 4054.02,Hartford County,,3
+9003405700,Census Tract 4057,Hartford County,,6
+9003406002,Census Tract 4060.02,Hartford County,,3
+9003415300,Census Tract 4153,Hartford County,,8
+9003415500,Census Tract 4155,Hartford County,,6
+9003415600,Census Tract 4156,Hartford County,,5
+9003415700,Census Tract 4157,Hartford County,,5
+9003415800,Census Tract 4158,Hartford County,,4
+9003415900,Census Tract 4159,Hartford County,,7
+9003416000,Census Tract 4160,Hartford County,,6
+9003416100,Census Tract 4161,Hartford County,,8
+9003416200,Census Tract 4162,Hartford County,,6
+9003416300,Census Tract 4163,Hartford County,,6
+9003416400,Census Tract 4164,Hartford County,,3
+9003416600,Census Tract 4166,Hartford County,,6
+9003416700,Census Tract 4167,Hartford County,,5
+9003416800,Census Tract 4168,Hartford County,,5
+9003417100,Census Tract 4171,Hartford County,,7
+9003417200,Census Tract 4172,Hartford County,,6
+9003417300,Census Tract 4173,Hartford County,,1322
+9003417400,Census Tract 4174,Hartford County,,3
+9003417500,Census Tract 4175,Hartford County,,4
+9003420400,Census Tract 4204,Hartford County,,3
+9003420500,Census Tract 4205,Hartford County,,4
+9005425300,Census Tract 4253,Litchfield County,,3
+9003430201,Census Tract 4302.01,Hartford County,,4
+9003430203,Census Tract 4302.03,Hartford County,,3
+9003430302,Census Tract 4303.02,Hartford County,,3
+9003430602,Census Tract 4306.02,Hartford County,,3
+9001045300,Census Tract 453,Fairfield County,,2
+9003460100,Census Tract 4601,Hartford County,,2
+9003460203,Census Tract 4602.03,Hartford County,,2
+9003460301,Census Tract 4603.01,Hartford County,,3
+9003462201,Census Tract 4622.01,Hartford County,,3
+9003462202,Census Tract 4622.02,Hartford County,,2
+9003464102,Census Tract 4641.02,Hartford County,,3
+9003466101,Census Tract 4661.01,Hartford County,,3
+9003466201,Census Tract 4662.01,Hartford County,,3
+9003466400,Census Tract 4664,Hartford County,,3
+9003471100,Census Tract 4711,Hartford County,,4
+9003471200,Census Tract 4712,Hartford County,,4
+9003471500,Census Tract 4715,Hartford County,,3
+9003473400,Census Tract 4734,Hartford County,,4
+9003473601,Census Tract 4736.01,Hartford County,,3
+9003473602,Census Tract 4736.02,Hartford County,,3
+9003473700,Census Tract 4737,Hartford County,,4
+9003473800,Census Tract 4738,Hartford County,,5
+9003476200,Census Tract 4762,Hartford County,,3
+9003477101,Census Tract 4771.01,Hartford County,,3
+9003477102,Census Tract 4771.02,Hartford County,,3
+9003477200,Census Tract 4772,Hartford County,,3
+9003480300,Census Tract 4803,Hartford County,,4
+9003480400,Census Tract 4804,Hartford County,,3
+9003480500,Census Tract 4805,Hartford County,,4
+9003480600,Census Tract 4806,Hartford County,,5
+9003480700,Census Tract 4807,Hartford County,,4
+9003480800,Census Tract 4808,Hartford County,,3
+9003480900,Census Tract 4809,Hartford County,,3
+9003481200,Census Tract 4812,Hartford County,,3
+9003481300,Census Tract 4813,Hartford County,,3
+9003484200,Census Tract 4842,Hartford County,,3
+9003487201,Census Tract 4872.01,Hartford County,,3
+9003487202,Census Tract 4872.02,Hartford County,,2
+9003487300,Census Tract 4873,Hartford County,,3
+9003487500,Census Tract 4875,Hartford County,,3
+9003490100,Census Tract 4901,Hartford County,,3
+9003490302,Census Tract 4903.02,Hartford County,,3
+9003492100,Census Tract 4921,Hartford County,,3
+9003492200,Census Tract 4922,Hartford County,,3
+9003492300,Census Tract 4923,Hartford County,,3
+9003492400,Census Tract 4924,Hartford County,,3
+9003492500,Census Tract 4925,Hartford County,,3
+9003492600,Census Tract 4926,Hartford County,,3
+9003494100,Census Tract 4941,Hartford County,,3
+9003494201,Census Tract 4942.01,Hartford County,,3
+9003494202,Census Tract 4942.02,Hartford County,,2
+9003494300,Census Tract 4943,Hartford County,,3
+9003494400,Census Tract 4944,Hartford County,,3
+9003494500,Census Tract 4945,Hartford County,,3
+9003494600,Census Tract 4946,Hartford County,,3
+9003496100,Census Tract 4961,Hartford County,,4
+9003496200,Census Tract 4962,Hartford County,,3
+9003496300,Census Tract 4963,Hartford County,,3
+9003497700,Census Tract 4977,Hartford County,,2
+9003500200,Census Tract 5002,Hartford County,,8
+9003500300,Census Tract 5003,Hartford County,,6
+9003500400,Census Tract 5004,Hartford County,,7
+9003500900,Census Tract 5009,Hartford County,,9
+9003501200,Census Tract 5012,Hartford County,,9
+9003501300,Census Tract 5013,Hartford County,,9
+9003501500,Census Tract 5015,Hartford County,,8
+9003501700,Census Tract 5017,Hartford County,,8
+9001050100,Census Tract 501,Fairfield County,,2
+9003502300,Census Tract 5023,Hartford County,,5
+9003502400,Census Tract 5024,Hartford County,,7
+9003503300,Census Tract 5033,Hartford County,,6
+9003503500,Census Tract 5035,Hartford County,,8
+9003503900,Census Tract 5039,Hartford County,,5
+9003504000,Census Tract 5040,Hartford County,,6
+9003504100,Census Tract 5041,Hartford County,,8
+9003504200,Census Tract 5042,Hartford County,,5
+9003504300,Census Tract 5043,Hartford County,,9
+9003504500,Census Tract 5045,Hartford County,,7
+9003504800,Census Tract 5048,Hartford County,,6
+9003504900,Census Tract 5049,Hartford County,,6
+9003510100,Census Tract 5101,Hartford County,,4
+9003510200,Census Tract 5102,Hartford County,,4
+9003510300,Census Tract 5103,Hartford County,,5
+9003510400,Census Tract 5104,Hartford County,,5
+9003510500,Census Tract 5105,Hartford County,,4
+9003510700,Census Tract 5107,Hartford County,,5
+9003510800,Census Tract 5108,Hartford County,,5
+9003510900,Census Tract 5109,Hartford County,,4
+9003511000,Census Tract 5110,Hartford County,,4
+9003511100,Census Tract 5111,Hartford County,,4
+9003511200,Census Tract 5112,Hartford County,,5
+9003511300,Census Tract 5113,Hartford County,,4
+9003511400,Census Tract 5114,Hartford County,,4
+9003514101,Census Tract 5141.01,Hartford County,,3
+9003514102,Census Tract 5141.02,Hartford County,,3
+9003514200,Census Tract 5142,Hartford County,,4
+9003514300,Census Tract 5143,Hartford County,,4
+9003515101,Census Tract 5151.01,Hartford County,,3
+9003520100,Census Tract 5201,Hartford County,,2
+9003520202,Census Tract 5202.02,Hartford County,,2
+9003520301,Census Tract 5203.01,Hartford County,,3
+9003520302,Census Tract 5203.02,Hartford County,,3
+9003520400,Census Tract 5204,Hartford County,,2
+9003524100,Census Tract 5241,Hartford County,,3
+9003524200,Census Tract 5242,Hartford County,,3
+9003524300,Census Tract 5243,Hartford County,,3
+9003524400,Census Tract 5244,Hartford County,,8
+9003524502,Census Tract 5245.02,Hartford County,,2
+9003524600,Census Tract 5246,Hartford County,,4
+9003524700,Census Tract 5247,Hartford County,,5
+9013526101,Census Tract 5261.01,Tolland County,,3
+9013526102,Census Tract 5261.02,Tolland County,,3
+9013529100,Census Tract 5291,Tolland County,,3
+9013530100,Census Tract 5301,Tolland County,,4
+9013530200,Census Tract 5302,Tolland County,,5
+9013530301,Census Tract 5303.01,Tolland County,,3
+9013530302,Census Tract 5303.02,Tolland County,,3
+9013530400,Census Tract 5304,Tolland County,,3
+9013530500,Census Tract 5305,Tolland County,,3
+9013533101,Census Tract 5331.01,Tolland County,,3
+9013533102,Census Tract 5331.02,Tolland County,,3
+9013535100,Census Tract 5351,Tolland County,,3
+9013538201,Census Tract 5382.01,Tolland County,,3
+9007541100,Census Tract 5411,Middlesex County,,6
+9007541200,Census Tract 5412,Middlesex County,,3
+9007541300,Census Tract 5413,Middlesex County,,2
+9007541401,Census Tract 5414.01,Middlesex County,,3
+9007541402,Census Tract 5414.02,Middlesex County,,3
+9007541500,Census Tract 5415,Middlesex County,,4
+9007541600,Census Tract 5416,Middlesex County,,6
+9007541700,Census Tract 5417,Middlesex County,,6
+9007542000,Census Tract 5420,Middlesex County,,4
+9007542100,Census Tract 5421,Middlesex County,,3
+9007542200,Census Tract 5422,Middlesex County,,3
+9007550100,Census Tract 5501,Middlesex County,,4
+9007550201,Census Tract 5502.01,Middlesex County,,3
+9007550202,Census Tract 5502.02,Middlesex County,,4
+9007560100,Census Tract 5601,Middlesex County,,3
+9007560200,Census Tract 5602,Middlesex County,,4
+9007570100,Census Tract 5701,Middlesex County,,3
+9007570200,Census Tract 5702,Middlesex County,,3
+9007570300,Census Tract 5703,Middlesex County,,3
+9007585100,Census Tract 5851,Middlesex County,,3
+9007590100,Census Tract 5901,Middlesex County,,3
+9007595101,Census Tract 5951.01,Middlesex County,,4
+9007595102,Census Tract 5951.02,Middlesex County,,4
+9007600100,Census Tract 6001,Middlesex County,,4
+9001060500,Census Tract 605,Fairfield County,,2
+9007610100,Census Tract 6101,Middlesex County,,4
+9007610200,Census Tract 6102,Middlesex County,,4
+9007610300,Census Tract 6103,Middlesex County,,3
+9007610400,Census Tract 6104,Middlesex County,,3
+9001061000,Census Tract 610,Fairfield County,,3
+9001061100,Census Tract 611,Fairfield County,,2
+9001061200,Census Tract 612,Fairfield County,,3
+9001061300,Census Tract 613,Fairfield County,,3
+9001061400,Census Tract 614,Fairfield County,,3
+9001061500,Census Tract 615,Fairfield County,,2
+9001061600,Census Tract 616,Fairfield County,,2
+9007620100,Census Tract 6201,Middlesex County,,4
+9007630100,Census Tract 6301,Middlesex County,,3
+9007640100,Census Tract 6401,Middlesex County,,3
+9011650100,Census Tract 6501,New London County,,3
+9011660101,Census Tract 6601.01,New London County,,3
+9011660102,Census Tract 6601.02,New London County,,4
+9007670100,Census Tract 6701,Middlesex County,,4
+9007670200,Census Tract 6702,Middlesex County,,4
+9007680100,Census Tract 6801,Middlesex County,,4
+9007680200,Census Tract 6802,Middlesex County,,3
+9011690300,Census Tract 6903,New London County,,5
+9011690400,Census Tract 6904,New London County,,5
+9011690500,Census Tract 6905,New London County,,5
+9011690700,Census Tract 6907,New London County,,5
+9011690800,Census Tract 6908,New London County,,6
+9011690900,Census Tract 6909,New London County,,3
+9011693300,Census Tract 6933,New London County,,3
+9011693400,Census Tract 6934,New London County,,4
+9011693500,Census Tract 6935,New London County,,3
+9011693600,Census Tract 6936,New London County,,3
+9011693700,Census Tract 6937,New London County,,3
+9011695201,Census Tract 6952.01,New London County,,2
+9011695202,Census Tract 6952.02,New London County,,3
+9011696100,Census Tract 6961,New London County,,5
+9011696200,Census Tract 6962,New London County,,4
+9011696300,Census Tract 6963,New London County,,3
+9011696400,Census Tract 6964,New London County,,7
+9011696500,Census Tract 6965,New London County,,3
+9011696600,Census Tract 6966,New London County,,3
+9011696700,Census Tract 6967,New London County,Mohegan Reservation and Off-Reservation Trust Land,4
+9011696800,Census Tract 6968,New London County,,5
+9011697000,Census Tract 6970,New London County,,6
+9011700100,Census Tract 7001,New London County,Mashantucket Pequot Reservation and Off-Reservation Trust Land,4
+9011701100,Census Tract 7011,New London County,Mashantucket Pequot Reservation and Off-Reservation Trust Land,4
+9011701200,Census Tract 7012,New London County,,3
+9001070100,Census Tract 701,Fairfield County,,3
+9011702100,Census Tract 7021,New London County,,3
+9011702300,Census Tract 7023,New London County,,3
+9011702400,Census Tract 7024,New London County,,3
+9011702500,Census Tract 7025,New London County,,4
+9011702600,Census Tract 7026,New London County,,3
+9011702700,Census Tract 7027,New London County,,3
+9011702800,Census Tract 7028,New London County,,4
+9011702900,Census Tract 7029,New London County,,3
+9001070200,Census Tract 702,Fairfield County,,5
+9011703000,Census Tract 7030,New London County,,3
+9001070300,Census Tract 703,Fairfield County,,15
+9001070400,Census Tract 704,Fairfield County,,7
+9011705101,Census Tract 7051.01,New London County,,3
+9011705102,Census Tract 7051.02,New London County,,4
+9011705200,Census Tract 7052,New London County,,3
+9011705300,Census Tract 7053,New London County,,3
+9011705400,Census Tract 7054,New London County,,3
+9001070500,Census Tract 705,Fairfield County,,9
+9001070600,Census Tract 706,Fairfield County,,5
+9011707100,Census Tract 7071,New London County,Paucatuck Eastern Pequot (state) Reservation,4
+9011708100,Census Tract 7081,New London County,,4
+9011709100,Census Tract 7091,New London County,,4
+9011709200,Census Tract 7092,New London County,,5
+9001070900,Census Tract 709,Fairfield County,,7
+9011710100,Census Tract 7101,New London County,,3
+9001071000,Census Tract 710,Fairfield County,,7
+9011711100,Census Tract 7111,New London County,,4
+9001071100,Census Tract 711,Fairfield County,,6
+9011712100,Census Tract 7121,New London County,,3
+9001071200,Census Tract 712,Fairfield County,,7
+9011713100,Census Tract 7131,New London County,,2
+9001071300,Census Tract 713,Fairfield County,,7
+9011714101,Census Tract 7141.01,New London County,,4
+9011714103,Census Tract 7141.03,New London County,,3
+9011714104,Census Tract 7141.04,New London County,Golden Hill Paugussett (state) Reservation,4
+9001071400,Census Tract 714,Fairfield County,,7
+9011715100,Census Tract 7151,New London County,,3
+9011716101,Census Tract 7161.01,New London County,,3
+9011716102,Census Tract 7161.02,New London County,,3
+9001071600,Census Tract 716,Fairfield County,,10
+9001071900,Census Tract 719,Fairfield County,,6
+9001072000,Census Tract 720,Fairfield County,,5
+9001072100,Census Tract 721,Fairfield County,,4
+9001072200,Census Tract 722,Fairfield County,,5
+9001072300,Census Tract 723,Fairfield County,,4
+9001072400,Census Tract 724,Fairfield County,,5
+9001072500,Census Tract 725,Fairfield County,,4
+9001072600,Census Tract 726,Fairfield County,,4
+9001072700,Census Tract 727,Fairfield County,,4
+9001072800,Census Tract 728,Fairfield County,,5
+9001073000,Census Tract 730,Fairfield County,,4
+9001073200,Census Tract 732,Fairfield County,,5
+9001073300,Census Tract 733,Fairfield County,,6
+9001073400,Census Tract 734,Fairfield County,,6
+9001073500,Census Tract 735,Fairfield County,,7
+9001073600,Census Tract 736,Fairfield County,,7
+9001073700,Census Tract 737,Fairfield County,,7
+9001073800,Census Tract 738,Fairfield County,,10
+9001074300,Census Tract 743,Fairfield County,,6
+9001074400,Census Tract 744,Fairfield County,,7
+9015800500,Census Tract 8005,Windham County,,5
+9015800700,Census Tract 8007,Windham County,,7
+9001080100,Census Tract 801,Fairfield County,,5
+9001080200,Census Tract 802,Fairfield County,,4
+9001080500,Census Tract 805,Fairfield County,,4
+9001080600,Census Tract 806,Fairfield County,,4
+9001080700,Census Tract 807,Fairfield County,,4
+9001080800,Census Tract 808,Fairfield County,,3
+9001080900,Census Tract 809,Fairfield County,,4
+9015815000,Census Tract 8150,Windham County,,4
+9013850100,Census Tract 8501,Tolland County,,3
+9013850200,Census Tract 8502,Tolland County,,3
+9011870100,Census Tract 8701,New London County,,3
+9011870200,Census Tract 8702,New London County,,3
+9011870300,Census Tract 8703,New London County,,5
+9011870501,Census Tract 8705.01,New London County,Mohegan Reservation and Off-Reservation Trust Land,4
+9011870502,Census Tract 8705.02,New London County,,4
+9011870701,Census Tract 8707.01,New London County,,3
+9011870703,Census Tract 8707.03,New London County,,4
+9011870704,Census Tract 8707.04,New London County,,4
+9013881100,Census Tract 8811,Tolland County,,3
+9013881500,Census Tract 8815,Tolland County,,3
+9013890100,Census Tract 8901,Tolland County,,5
+9013890201,Census Tract 8902.01,Tolland County,,3
+9013890202,Census Tract 8902.02,Tolland County,,3
+9015900200,Census Tract 9002,Windham County,,4
+9015902200,Census Tract 9022,Windham County,,4
+9015903200,Census Tract 9032,Windham County,,4
+9001090300,Census Tract 903,Fairfield County,,3
+9015904400,Census Tract 9044,Windham County,,5
+9015906100,Census Tract 9061,Windham County,,4
+9015907200,Census Tract 9072,Windham County,,5
+9015907300,Census Tract 9073,Windham County,,5
+9001090700,Census Tract 907,Fairfield County,,3
+9015908100,Census Tract 9081,Windham County,,4
