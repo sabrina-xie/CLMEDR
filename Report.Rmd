@@ -52,6 +52,15 @@ all <- data.frame(
   Year=numeric(0),
   stringsAsFactors=FALSE
 )
+all.HES <- data.frame(
+  `Census Tract`=character(0),
+  Town=character(0),
+  `Distressed Tract`=character(0),
+  units=character(0),
+  program=character(0),
+  count=numeric(0),
+  stringsAsFactors=FALSE
+)
 
 for(k in loop){
   
@@ -71,9 +80,15 @@ for(k in loop){
   
   all <- rbind(all,data)
   
+  HES <- HES %>% 
+    mutate(Year=as.numeric(k))
+  
+  all.HES <- rbind(all.HES,HES)
+  
 }
 
 data <- all
+HES <- all.HES
 
 # Other metrics
 source("Demo-data.R", local=knitr::knit_global())
@@ -116,9 +131,10 @@ data <- left_join(data,race2,by=c("Census Tract")) %>%
 
 errors <- data[!complete.cases(data), ]
 census <- read.csv("full list.csv") %>% rename(`Census Tract`=Census.Tract)
-errors <- left_join(errors, census, by="Census Tract")
+errors <- left_join(errors, census, by="Census Tract") %>% 
+  rename(valid.tract = Year.y)
 
-rm(list=setdiff(ls(), c("data","race")))
+rm(list=setdiff(ls(), c("data","race","HES","errors")))
 
 ```
 
@@ -216,6 +232,12 @@ It makes sense that distribution of HES-IE funds would be greater to distressed 
 - Moderately distressed tracts: median income 60-80% state median income
 
 ```{r}
+
+ggplot() +
+  geom_bar(data=HES,aes(x=`Distressed Tract`,y=count,fill=program),stat="identity",position="stack")+
+  facet_grid(cols=vars(Year),rows=vars(Utility))
+
+
 totals <- data %>% 
   filter(Size=="HES") %>% 
   group_by(Utility,Year) %>% 
@@ -241,7 +263,6 @@ tab <- data %>%
 print(tab)
 
 tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
-  
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
         geom_line()+

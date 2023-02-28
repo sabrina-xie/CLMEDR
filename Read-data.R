@@ -1,4 +1,3 @@
-
 ### setup ####
 
 #function defined to read sheets in excel files
@@ -89,6 +88,17 @@ ES.HES <- data$ES.HES %>%
   pivot_longer(cols=c(HES,HES_IE),
                names_to="Cat",
                values_to="disbursements")
+
+ES.HES.participation <- data$ES.HES %>% 
+  select(`Census Tract`,Town,`Distressed Tract`,`HES Single`,`HES 2-4`,`HES 4+`,`HES-IE Single`,`HES-IE 2-4`,`HES-IE 4+`) %>% 
+  pivot_longer( cols=starts_with("HES"),
+    names_to = c(".value", "units"),
+    names_sep = " ") %>% 
+  pivot_longer(cols=c(`HES`,`HES-IE`),
+               names_to="program",
+               values_to="count") %>% 
+  mutate("Utility"="ES")
+  
   
 ES <- rbind(ES.small,ES.large,ES.HES) %>%  #merge
   mutate("Utility"="ES") 
@@ -170,6 +180,16 @@ UI.HES <- data$UI.HES %>%
                names_to="Cat",
                values_to="disbursements")
 
+UI.HES.participation <- data$UI.HES %>% 
+  select(`Census Tract`,Town,`Distressed Tract`,`HES Single`,`HES 2-4`,`HES 4+`,`HES-IE Single`,`HES-IE 2-4`,`HES-IE 4+`) %>% 
+  pivot_longer( cols=starts_with("HES"),
+                names_to = c(".value", "units"),
+                names_sep = " ") %>% 
+  pivot_longer(cols=c(`HES`,`HES-IE`),
+               names_to="program",
+               values_to="count") %>% 
+  mutate("Utility"="UI")
+
 UI <- rbind(UI.small,UI.large,UI.HES) %>%  
   mutate("Utility"="UI")#merge
 
@@ -184,4 +204,14 @@ data <- rbind(UI,ES)%>%
          `Distressed Tract`=toupper(`Distressed Tract`),
          Size=toupper(Size),
          Cat=toupper(Cat))
+
+HES <- rbind(ES.HES.participation,UI.HES.participation)%>% 
+  filter(`Distressed Tract`!="Totals",
+         `Distressed Tract`!="Total",
+         `Distressed Tract`!="(blank)") %>% 
+  mutate(count=as.numeric(count),
+         `Census Tract`=as.numeric(`Census Tract`),
+         Town=toupper(Town),
+         `Distressed Tract`=toupper(`Distressed Tract`),
+         units=toupper(units))
 
