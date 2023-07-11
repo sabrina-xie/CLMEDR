@@ -40,15 +40,15 @@ ES.small <- ES.small %>%
                          Type=="Residential Incentive Disbursements" ~ "residential",
                          Type=="C&I CLM $ Collected" ~ "C&I",
                          Type=="C&I Incentive Disbursements" ~ "C&I")) %>% 
-  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "collections", #creating category for collect/disburse for later column defining
-                         Type=="Incentive Disbursements" ~ "disbursements",
-                         Type=="Residential CLM $ Collected" ~ "collections",
-                         Type=="Residential Incentive Disbursements" ~ "disbursements",
-                         Type=="C&I CLM $ Collected" ~ "collections",
-                         Type=="C&I Incentive Disbursements" ~ "disbursements")) %>% 
+  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "Collections", #creating category for collect/disburse for later column defining
+                         Type=="Incentive Disbursements" ~ "Disbursements",
+                         Type=="Residential CLM $ Collected" ~ "Collections",
+                         Type=="Residential Incentive Disbursements" ~ "Disbursements",
+                         Type=="C&I CLM $ Collected" ~ "Collections",
+                         Type=="C&I Incentive Disbursements" ~ "Disbursements")) %>% 
   select(-Type)
 ES.small <- ES.small %>% 
-  pivot_wider(names_from="Col",values_from="value") #creating collections and disbursements columns
+  pivot_wider(names_from="Col",values_from="value") #creating Collections and Disbursements columns
 
 #repeating above but for large customers
 ES.large <- data$ES.large %>% 
@@ -68,12 +68,12 @@ ES.large <- ES.large %>%
                          Type=="Residential Incentive Disbursements" ~ "residential",
                          Type=="C&I CLM $ Collected" ~ "C&I",
                          Type=="C&I Incentive Disbursements" ~ "C&I")) %>% 
-  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "collections",
-                         Type=="Incentive Disbursements" ~ "disbursements",
-                         Type=="Residential CLM $ Collected" ~ "collections",
-                         Type=="Residential Incentive Disbursements" ~ "disbursements",
-                         Type=="C&I CLM $ Collected" ~ "collections",
-                         Type=="C&I Incentive Disbursements" ~ "disbursements")) %>% 
+  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "Collections",
+                         Type=="Incentive Disbursements" ~ "Disbursements",
+                         Type=="Residential CLM $ Collected" ~ "Collections",
+                         Type=="Residential Incentive Disbursements" ~ "Disbursements",
+                         Type=="C&I CLM $ Collected" ~ "Collections",
+                         Type=="C&I Incentive Disbursements" ~ "Disbursements")) %>% 
   select(-Type)
 ES.large <- ES.large %>% 
   pivot_wider(names_from="Col",values_from="value")
@@ -82,12 +82,12 @@ ES.large <- ES.large %>%
 ES.HES <- data$ES.HES %>%
   mutate("Size"="HES") %>% 
   select(`Census Tract`,Town,`Distressed Tract`,`CLM $ Collected`,`HES Incentives`,`HES-IE Incentives`,Size) %>%
-  rename(collections="CLM $ Collected",
+  rename(Collections="CLM $ Collected",
          HES=`HES Incentives`,
          HES_IE=`HES-IE Incentives`) %>% 
   pivot_longer(cols=c(HES,HES_IE),
                names_to="Cat",
-               values_to="disbursements")
+               values_to="Disbursements")
 
 ES.HES.participation <- data$ES.HES %>% 
   select(`Census Tract`,Town,`Distressed Tract`,`HES Single`,`HES 2-4`,`HES 4+`,`HES-IE Single`,`HES-IE 2-4`,`HES-IE 4+`) %>% 
@@ -131,15 +131,15 @@ UI.small <- UI.small %>%
                          Type=="Residential Incentive Disbursements" ~ "residential",
                          Type=="C&I CLM $ Collected" ~ "C&I",
                          Type=="C&I Incentive Disbursements" ~ "C&I")) %>% 
-  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "collections", #creating category for collect/disburse for later column defining
-                         Type=="Incentive Disbursements" ~ "disbursements",
-                         Type=="Residential CLM $ Collected" ~ "collections",
-                         Type=="Residential Incentive Disbursements" ~ "disbursements",
-                         Type=="C&I CLM $ Collected" ~ "collections",
-                         Type=="C&I Incentive Disbursements" ~ "disbursements")) %>% 
+  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "Collections", #creating category for collect/disburse for later column defining
+                         Type=="Incentive Disbursements" ~ "Disbursements",
+                         Type=="Residential CLM $ Collected" ~ "Collections",
+                         Type=="Residential Incentive Disbursements" ~ "Disbursements",
+                         Type=="C&I CLM $ Collected" ~ "Collections",
+                         Type=="C&I Incentive Disbursements" ~ "Disbursements")) %>% 
   select(-Type)
 UI.small <- UI.small %>% 
-  pivot_wider(names_from="Col",values_from="value") #creating collections and disbursements columns
+  pivot_wider(names_from="Col",values_from="value") #creating Collections and Disbursements columns
 
 #repeating above but for large customers
 UI.large <- data$UI.large %>% 
@@ -159,12 +159,12 @@ UI.large <- UI.large %>%
                          Type=="Residential Incentive Disbursements" ~ "residential",
                          Type=="C&I CLM $ Collected" ~ "C&I",
                          Type=="C&I Incentive Disbursements" ~ "C&I")) %>% 
-  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "collections", #creating category for collect/disburse for later column defining
-                         Type=="Incentive Disbursements" ~ "disbursements",
-                         Type=="Residential CLM $ Collected" ~ "collections",
-                         Type=="Residential Incentive Disbursements" ~ "disbursements",
-                         Type=="C&I CLM $ Collected" ~ "collections",
-                         Type=="C&I Incentive Disbursements" ~ "disbursements")) %>% 
+  mutate("Col"=case_when(Type=="CLM $ Collected" ~ "Collections", #creating category for collect/disburse for later column defining
+                         Type=="Incentive Disbursements" ~ "Disbursements",
+                         Type=="Residential CLM $ Collected" ~ "Collections",
+                         Type=="Residential Incentive Disbursements" ~ "Disbursements",
+                         Type=="C&I CLM $ Collected" ~ "Collections",
+                         Type=="C&I Incentive Disbursements" ~ "Disbursements")) %>% 
   select(-Type)
 UI.large <- UI.large %>% 
   pivot_wider(names_from="Col",values_from="value")
@@ -173,12 +173,12 @@ UI.large <- UI.large %>%
 UI.HES <- data$UI.HES %>%
   mutate("Size"="HES") %>% 
   select(`Census Tract`,Town,`Distressed Tract`,`CLM $ Collected`,`HES Incentives`,`HES-IE Incentives`,Size) %>%
-  rename(collections="CLM $ Collected",
+  rename(Collections="CLM $ Collected",
          HES=`HES Incentives`,
          HES_IE=`HES-IE Incentives`) %>% 
   pivot_longer(cols=c(HES,HES_IE),
                names_to="Cat",
-               values_to="disbursements")
+               values_to="Disbursements")
 
 UI.HES.participation <- data$UI.HES %>% 
   select(`Census Tract`,Town,`Distressed Tract`,`HES Single`,`HES 2-4`,`HES 4+`,`HES-IE Single`,`HES-IE 2-4`,`HES-IE 4+`) %>% 
@@ -197,8 +197,8 @@ UI <- rbind(UI.small,UI.large,UI.HES) %>%
 data <- rbind(UI,ES)%>% 
   filter(`Distressed Tract`!="Totals",
          `Distressed Tract`!="Total") %>% 
-  mutate(collections=as.numeric(collections),
-         disbursements=as.numeric(disbursements),
+  mutate(Collections=as.numeric(Collections),
+         Disbursements=as.numeric(Disbursements),
          `Census Tract`=as.numeric(`Census Tract`),
          Town=toupper(Town),
          `Distressed Tract`=toupper(`Distressed Tract`),

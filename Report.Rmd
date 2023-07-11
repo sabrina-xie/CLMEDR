@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 options(scipen = 10, digits = 2)
 
@@ -20,12 +20,13 @@ library(lubridate) #for date-times
 library(tidycensus) #for mapping
 library(tigris)
 library(viridis) #for color maps
+library(knitr) #for tables
 
 ```
 
 ## Read in data
 
-Data for median income, spending & collections from Eversource, UI in 2019, 2020 and 2021 filed under C&LM.
+Data for median income, spending & Collections from Eversource, UI in 2019, 2020 and 2021 filed under C&LM.
 
 Data for demographics:
 
@@ -39,15 +40,15 @@ There are some problems with census tract numbers in the utility data so some de
 
 ```{r, include=FALSE, echo=FALSE}
 
-loop <- c("2019","2020","2021")
+loop <- c("2019","2020","2021","2022")
 all <- data.frame(
   `Census Tract`=character(0),
   Town=character(0),
   `Distressed Tract`=character(0),
   Size=character(0),
   Cat=character(0),
-  collections=numeric(0),
-  disbursements=numeric(0),
+  Collections=numeric(0),
+  Disbursements=numeric(0),
   Utility=character(0),
   Year=numeric(0),
   stringsAsFactors=FALSE
@@ -73,7 +74,7 @@ for(k in loop){
   # the outputs of this script are data frames for each utility for large, small and HES data, titled "ES" or "UI"
   # it also creates "data" which is one large dataframe with ALL the collection and disbursement data for both utilities
   
-  # the columns in "data" are: Census Tract, Town, Distressed Tract, Cat, collections, disbursements, Utility
+  # the columns in "data" are: Census Tract, Town, Distressed Tract, Cat, Collections, Disbursements, Utility
   
   data <- data %>% 
     mutate(Year=as.numeric(k))
@@ -95,7 +96,7 @@ source("Demo-data.R", local=knitr::knit_global())
 
 data <- data %>%
   distinct() %>%  
-  mutate(disbursements=replace_na(disbursements,0),collections=replace_na(collections,0))
+  mutate(Disbursements=replace_na(Disbursements,0),Collections=replace_na(Collections,0))
 
 race <- get_decennial(
   geography = "tract",
@@ -155,9 +156,9 @@ totals <- data %>%
   filter(Size!="HES",
          Cat=="TOTAL") %>% 
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
@@ -165,19 +166,19 @@ tab <- data %>%
          Cat=="TOTAL", #residential and C&I
          `Distressed Tract`=="YES") %>%  #distressed
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
   
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
@@ -190,9 +191,9 @@ totals <- data %>%
   filter(Size!="HES",
          Cat!="TOTAL") %>% 
   group_by(Utility,Year,Size,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
@@ -200,19 +201,19 @@ tab <- data %>%
          Cat!="TOTAL", #residential and C&I
          `Distressed Tract`=="YES") %>%  #distressed
   group_by(Utility,Year,Size,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
   
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
@@ -241,28 +242,28 @@ ggplot() +
 totals <- data %>% 
   filter(Size=="HES") %>% 
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)/2) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)/2) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
   filter(Size=="HES",
          `Distressed Tract`=="YES") %>%  #distressed
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)/2) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)/2) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
         geom_line()+
@@ -275,28 +276,28 @@ print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
 totals <- data %>% 
   filter(Size=="HES") %>% 
   group_by(Utility,Year,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
   filter(Size=="HES",
          `Distressed Tract`=="YES") %>%  #distressed
   group_by(Utility,Year,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
   
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
@@ -310,28 +311,28 @@ print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
 totals <- data %>% 
   filter(Size=="HES") %>% 
   group_by(Utility,Year,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
   filter(Size=="HES", 
          Moderate.distress=="YES") %>%  #moderately distressed
   group_by(Utility,Year,Cat) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Category",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
   
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
@@ -357,9 +358,9 @@ totals <- data %>%
   filter(Size!="HES",
          Cat=="TOTAL") %>% 
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct()
 
 tab <- data %>% 
@@ -367,26 +368,26 @@ tab <- data %>%
          Cat=="TOTAL", #residential and C&I
          `Justice40.disadvantaged`=="TRUE") %>%  #distressed
   group_by(Utility,Year) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(collections,disbursements,Utility,Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
   distinct() %>% 
   ungroup() %>% 
-  mutate(collections=collections/totals$collections*100, #this is the proportion of total collections
-         disbursements=disbursements/totals$disbursements*100, #this is the proportion of total disbursements
-         equitable=case_when(collections>disbursements ~ "NO",
-                             collections<disbursements ~ "YES")) #this is the comparison
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
 
-print(tab)
+kable(tab)
 
-tab<-pivot_longer(tab,cols=c("collections","disbursements"),names_to="Cat",values_to="Pct")
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Cat",values_to="Pct")
   
   
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Cat))+
         geom_line()+
         geom_point(shape=4)+
         geom_hline(yintercept=40)+
-        geom_line(data=tab[tab$Cat=="collections",],aes(x=Year,y=Pct*1.3),color="black")+
+        geom_line(data=tab[tab$Cat=="Collections",],aes(x=Year,y=Pct*1.3),color="black")+
         facet_grid(cols=vars(Utility)))
 
 ```
@@ -400,8 +401,8 @@ by.tract <- data %>%
   filter(Cat != "total",
          Size != "HES") %>% 
   group_by(`Census Tract`,Year) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
   select(-Size,-Cat) %>% 
   ungroup() %>% 
   distinct()
@@ -463,21 +464,21 @@ high.t <- length(which(med_income$cat=="high"))/length(med_income$cat)
 
 med_income.join <- left_join(by.tract,med_income,all.y=TRUE) %>% 
   group_by(Year,cat,Utility) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(Year,cat,Utility,collections,disbursements)%>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Year,cat,Utility,Collections,Disbursements)%>% 
   distinct() %>% 
   filter(is.na(cat)==FALSE)
 
 totals <- med_income.join %>% 
   group_by(Year,Utility) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(Year,Utility,disbursements) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Year,Utility,Disbursements) %>% 
   distinct() %>% 
-  mutate(low=disbursements*low.t,
-         moderate=disbursements*mod.t,
-         high=disbursements*high.t) %>% 
-  select(-disbursements)
+  mutate(low=Disbursements*low.t,
+         moderate=Disbursements*mod.t,
+         high=Disbursements*high.t) %>% 
+  select(-Disbursements)
 
 totals<-pivot_longer(totals,cols=c("low","moderate","high"),names_to="cat",values_to="baseline")
 
@@ -485,7 +486,7 @@ med_income.join <- left_join(med_income.join,totals)
 
 med_income.join$cat <- factor(med_income.join$cat, levels = c("low","moderate","high"))
 
-ggplot(med_income.join, aes(y=disbursements,x=cat,fill=Utility))+
+ggplot(med_income.join, aes(y=Disbursements,x=cat,fill=Utility))+
   geom_bar(stat="identity",position="dodge")+
   geom_errorbar(aes(ymin=baseline,ymax=baseline),width=1,position=position_dodge(0.9))+
   facet_grid(cols=vars(Year),rows=vars(Utility),scales="free")+
@@ -514,19 +515,18 @@ ggplot(race,aes(x=percent)) +
   labs(caption="vertical line denotes mean")
 
 race <- race %>% 
-  mutate(percentile = percent_rank(percent)) %>% 
   mutate(rank = case_when(
-    percentile <= 0.2 ~ 1,
-    between(percentile,0.2,0.4) ~ 2,
-    between(percentile, 0.4,0.6) ~ 3,
-    between(percentile, 0.6,0.8) ~ 4,
-    percentile >= 0.8 ~ 5
+    percent <= 20 ~ 1,
+    between(percent,20,40) ~ 2,
+    between(percent, 40,60) ~ 3,
+    between(percent, 60,80) ~ 4,
+    percent >= 80 ~ 5
   ))
 
 ##
 
-ggplot(race)+
-  geom_bar(aes(x=rank),stat="count")
+ggplot(race,aes(x=rank))+
+  geom_histogram(bins=5)
 
 race <- race %>% 
   mutate(GEOID=as.numeric(GEOID)) %>% 
@@ -534,27 +534,27 @@ race <- race %>%
 
 race.join <- left_join(by.tract,race,all.y=TRUE) %>% 
   group_by(Year,rank,Utility) %>% 
-  mutate(collections=sum(collections)) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(Year,rank,Utility,collections,disbursements)%>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Year,rank,Utility,Collections,Disbursements)%>% 
   distinct() %>% 
   filter(is.na(rank)==FALSE)
 
 totals <- race.join %>% 
-  group_by(Year,Utility) %>% 
-  mutate(disbursements=sum(disbursements)) %>% 
-  select(Year,Utility,disbursements) %>% 
+  group_by(Year,Utility,rank) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  select(Year,Utility,Collections) %>% 
   distinct() %>% 
-  mutate(baseline=disbursements*0.2) %>% 
-  select(-disbursements)
+  mutate(baseline=Collections) %>% 
+  select(-Collections)
 
 race.join <- left_join(race.join,totals)
 
-ggplot(race.join, aes(y=disbursements,x=rank,fill=Utility))+
+ggplot(race.join, aes(y=Disbursements,x=rank,fill=Utility))+
   geom_bar(stat="identity",position="dodge")+
   geom_errorbar(aes(ymin=baseline,ymax=baseline),width=1,position=position_dodge(0.9))+
   facet_grid(cols=vars(Year),rows=vars(Utility),scales="free")+
-  labs(caption="Black line denotes baseline")
+  labs(caption="Black line denotes baseline (collections)")
 
 
 ```
@@ -586,12 +586,12 @@ ggplot(data = LEAD.joined, aes(fill = Avg..Energy.Burden....income.)) +
 
 ```{r fig.width=10,fig.height=10}
 
-data.joined <- left_join(census_tracts,data,by=c("census_tract"="Census Tract")) %>% filter(Size!="HES",Cat=="TOTAL") %>% select(-Size) %>% group_by(census_tract,Year) %>% mutate(collections=sum(collections),disbursements=sum(disbursements)) %>% distinct()
+data.joined <- left_join(census_tracts,data,by=c("census_tract"="Census Tract")) %>% filter(Size!="HES",Cat=="TOTAL") %>% select(-Size) %>% group_by(census_tract,Year) %>% mutate(Collections=sum(Collections),Disbursements=sum(Disbursements)) %>% distinct()
 
 b <- c(-Inf,1.35,Inf)
 colors <- c('navyblue', 'orange', 'darkorange1')
 
-data.joined<-pivot_longer(data.joined,cols=c("collections","disbursements"),names_to="Category",values_to="Value")
+data.joined<-pivot_longer(data.joined,cols=c("Collections","Disbursements"),names_to="Category",values_to="Value")
 
 ggplot(data = data.joined, aes(fill = Value)) + 
   geom_sf(colour="white",lwd=0) + 
