@@ -145,11 +145,13 @@ rm(list=setdiff(ls(), c("data","race","HES","errors")))
 
 Overall trend toward closing gaps
 
+Definitions:
+
 - Distressed tracts: median income <60% state median income
 
 - Small load: <100 kWh
 
-
+Including large & small load customers, distressed census tracts
 ```{r}
 
 totals <- data %>% 
