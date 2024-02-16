@@ -192,6 +192,39 @@ print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
 totals <- data %>% 
   filter(Size!="HES",
          Cat!="TOTAL") %>% 
+  group_by(Utility,Year,Size) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size!="HES", #large and small
+         Cat!="TOTAL", #residential and C&I
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Utility,Year,Size) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Utility,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
+
+kable(tab)
+
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
+
+print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4)+
+        facet_grid(cols=vars(Size)))
+
+totals <- data %>% 
+  filter(Size!="HES",
+         Cat!="TOTAL") %>% 
   group_by(Utility,Year,Size,Cat) %>% 
   mutate(Collections=sum(Collections)) %>% 
   mutate(Disbursements=sum(Disbursements)) %>% 
@@ -216,8 +249,7 @@ tab <- data %>%
 kable(tab)
 
 tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
-  
-  
+
 print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
         geom_line()+
         geom_point(shape=4)+
