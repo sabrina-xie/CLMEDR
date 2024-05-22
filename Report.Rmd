@@ -153,14 +153,48 @@ Definitions:
 
 Including large & small load customers, distressed census tracts
 ```{r}
+print("Combined total")
 
 totals <- data %>% 
   filter(Size!="HES",
          Cat=="TOTAL") %>% 
-  group_by(Utility,Year) %>% 
+  group_by(Year) %>% 
   mutate(Collections=sum(Collections)) %>% 
   mutate(Disbursements=sum(Disbursements)) %>% 
-  select(Collections,Disbursements,Utility,Year) %>% 
+  select(Collections,Disbursements,Year) %>% 
+  distinct()
+
+tab <- data %>% 
+  filter(Size!="HES", #large and small
+         Cat=="TOTAL", #residential and C&I
+         `Distressed Tract`=="YES") %>%  #distressed
+  group_by(Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Year) %>% 
+  distinct() %>% 
+  ungroup() %>% 
+  mutate(Collections=Collections/totals$Collections*100, #this is the proportion of total Collections
+         Disbursements=Disbursements/totals$Disbursements*100, #this is the proportion of total Disbursements
+         Parity=case_when(Collections>Disbursements ~ "NO",
+                             Collections<Disbursements ~ "YES")) #this is the comparison
+
+kable(tab)
+
+tab<-pivot_longer(tab,cols=c("Collections","Disbursements"),names_to="Category",values_to="Pct")
+  
+  
+print(ggplot(data=tab,aes(x=Year,y=Pct,linetype=Category))+
+        geom_line()+
+        geom_point(shape=4))
+
+totals <- data %>% 
+  filter(Size!="HES",
+         Cat=="TOTAL") %>% 
+  group_by(Year) %>% 
+  mutate(Collections=sum(Collections)) %>% 
+  mutate(Disbursements=sum(Disbursements)) %>% 
+  select(Collections,Disbursements,Year) %>% 
   distinct()
 
 tab <- data %>% 
@@ -188,6 +222,7 @@ print(ggplot(data=tab,aes(x=Year,y=Pct,color=Utility,linetype=Category))+
         geom_point(shape=4)+
         facet_grid(cols=vars(Utility)))
 
+print("Total by utility")
 
 totals <- data %>% 
   filter(Size!="HES",
